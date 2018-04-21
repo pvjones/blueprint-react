@@ -1,0 +1,42 @@
+import { Config, EnvConfig, EnvKeys } from './models'
+
+const config: Config = {
+
+  dev: {
+    db: {
+      host: 'localhost',
+      port: 5432,
+      database: 'master',
+      user: 'postgres',
+      password: '',
+    },
+    api: {
+      host: 'http://localhost',
+      jwtSecret: 'myAppHasASecret',
+      baseUrl: 'api',
+      port: 3000,
+    }
+  },
+
+  prod: {
+    db: {
+      host: 'localhost',
+      port: 5432,
+      database: 'master',
+      user: 'postgres',
+      password: '',
+    },
+    api: {
+      host: 'http://localhost',
+      jwtSecret: 'myAppHasASecret',
+      baseUrl: 'api',
+      port: 3000,
+    }
+  }
+
+}
+
+export default (env?: string): EnvConfig => {
+  const envType = (env || process.env.ENV || 'dev') as EnvKeys
+  return config[envType]
+}
