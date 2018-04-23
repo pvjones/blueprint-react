@@ -29,7 +29,6 @@ export const login = async (request: AppRequest, email: string, password: string
 
   const session = await createSession(request, userId)
   return transformSession(session)
-
 }
 
 export const logout = async (request: AppRequest): Promise<void> => {
@@ -40,9 +39,6 @@ export const logout = async (request: AppRequest): Promise<void> => {
 }
 
 export const createSession = async (request: AppRequest, userId: number): Promise<UserSession> => {
-  // const expiry = new Date()
-  // expiry.setDate(expiry.getDate() + 1)
-
   const query = sql.createSession(userId, getUuid())
   return request.utils.db.one<UserSession>(query.sql, query.values)
 }
