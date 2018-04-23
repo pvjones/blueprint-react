@@ -35,6 +35,7 @@ export const logout = async (request: AppRequest): Promise<void> => {
   const { authorization } = request.headers
   const parsed = parseToken(authorization)
   const { uuid } = parsed
+
   return deleteSessionByUuid(request, uuid)
 }
 
