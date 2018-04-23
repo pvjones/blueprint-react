@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pvjones/blueprint-react.git"
+    "url": "git+https://github.com/pvjones/boilerplate-react-redux-tsnode-pg.git"
   },
   "author": "Paul Jones",
   "license": "ISC",
