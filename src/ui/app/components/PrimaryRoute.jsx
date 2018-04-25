@@ -1,6 +1,6 @@
 import React from 'react'
-import { Switch } from 'react-router-dom'
-import AuthenticatedRoute from './Route/AuthenticatedRoute'
+import { Route, Switch } from 'react-router-dom'
+import AuthenticatedRoute from './Routing/AuthenticatedRoute'
 import Login from './Views/Login'
 import Register from './Views/Register'
 import Home from './Views/Home'
@@ -19,7 +19,7 @@ const PrimaryRoute = () => (
       redirectPath='/'
       redirectIfAuthenticated
     />
-    <AuthenticatedRoute
+    <Route
       path='/'
       render={() => <Home />}
     />
