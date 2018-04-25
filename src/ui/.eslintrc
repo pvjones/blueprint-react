@@ -36,6 +36,7 @@
     "jsx-quotes": "off",
     "function-paren-newline": "off",
     "object-curly-newline": "off",
+    "no-bitwise": "off",
     "indent": [
       "off",
       2

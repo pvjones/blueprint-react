@@ -8,11 +8,14 @@ import { signOut } from '../../store/actions/security.actions'
 
 const Home = ({ classes, logoutAction }) => (
   <Flexbox flexDirection='column' flex='1'>
-    <Flexbox justifyContent='space-between' className={classes.header}>
+    <Flexbox justifyContent='space-between' alignItems='center' className={classes.header}>
       <span>Blueprint</span>
       <Button component={Link} to='/login'>
         Start Exploring
       </Button>
+    </Flexbox>
+    <Flexbox flexDirection='column' className={classes.main}>
+      <div>Home</div>
     </Flexbox>
   </Flexbox>
 )
@@ -21,10 +24,16 @@ const mapDispatchToProps = dispatch => ({
   logoutAction: () => dispatch(signOut()),
 })
 
-const styles = () => ({
+const styles = ({ spacing, colors, dimensions, typography, mixins: { px, combine } }) => ({
   header: {
-    padding: '8px 48px',
-    color: 
+    height: dimensions.topBarHeight,
+    padding: combine(px(0), px(spacing.unit * 3)),
+    color: colors.blue[100],
+    fontFamily: typography.headline.fontFamily,
+  },
+  main: {
+    fontFamily: typography.body.fontFamily,
+    fontSize: typography.body.fontSize,
   },
 })
 
