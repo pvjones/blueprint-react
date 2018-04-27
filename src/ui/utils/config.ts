@@ -18,7 +18,7 @@ const config = {
 
 }
 
-export default env => {
+export default (env?: string) => {
   const envType = env || process.env.ENV || 'dev'
   return config[envType]
 }
