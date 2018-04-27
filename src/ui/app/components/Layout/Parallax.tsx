@@ -1,6 +1,6 @@
 import React from 'react'
 
-class Parallax extends React.PureComponent<OwnProps, OwnState> {
+class Parallax extends React.PureComponent<ParallaxProps, State> {
   constructor(props) {
     super(props)
   }
@@ -45,12 +45,12 @@ class Parallax extends React.PureComponent<OwnProps, OwnState> {
 
 export default Parallax
 
-export interface OwnProps {
+export interface ParallaxProps {
   className?: string
   rateDivisor: number
   component: React.ReactNode
 }
 
-interface OwnState {
+interface State {
   el: HTMLElement
 }

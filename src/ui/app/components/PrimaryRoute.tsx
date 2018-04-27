@@ -1,9 +1,8 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
-import AuthenticatedRoute from './Routing/AuthenticatedRoute'
-import Login from './Views/Login'
-import Register from './Views/Register'
-import Home from './Views/Home'
+import { Switch, Route, AuthenticatedRoute } from './Routing'
+import Login from './Views/Security/Login'
+import Register from './Views/Security/Register'
+import Home from './Views/Home/Home'
 
 const PrimaryRoute: React.SFC = () => (
   <Switch>

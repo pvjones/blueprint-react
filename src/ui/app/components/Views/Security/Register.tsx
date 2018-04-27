@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { registerUser } from '../../store/actions/security.actions'
+import { registerUser } from '../../../store/actions/security.actions'
 
 class Register extends React.PureComponent<MergedProps, OwnState> {
   constructor(props) {
