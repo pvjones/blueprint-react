@@ -9,6 +9,7 @@ import { getThemeConfig } from './style/theme'
 import { composeStore } from './store/store'
 import registerServiceWorker from './registerServiceWorker'
 import PrimaryRoute from './components/PrimaryRoute'
+import './app.css'
 
 const history = createHistory()
 const historyMiddleware = routerMiddleware(history)
