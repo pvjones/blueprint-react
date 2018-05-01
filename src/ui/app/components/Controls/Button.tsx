@@ -3,7 +3,7 @@ import { withStyles, WithStyles, StyleRulesCallback } from '../Common'
 import { Button as MuiButton } from 'material-ui'
 import { ButtonProps as MuiButtonProps } from 'material-ui/Button'
 
-const Button: React.SFC<MergedProps> = ({ classes, colorKey = 'white', ...other }) => (
+const Button: React.SFC<MergedProps> = ({ classes, colorKey = 'coral', ...other }) => (
   <MuiButton
     {...other}
     classes={{ root: classes[colorKey] }}

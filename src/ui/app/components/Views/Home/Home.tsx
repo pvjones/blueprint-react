@@ -17,19 +17,19 @@ const Home: React.SFC<MergedProps> = ({ classes }) => (
     >
       <span>Blueprint</span>
       <Link to='/login'>
-        <Button colorKey='coral'>Start Exploring</Button>
+        <Button>Start Exploring</Button>
       </Link>
     </Flexbox>
     <Masthead />
     <InfoBox>
       <span className={classes.infoHeadline}>What <span className={classes.colorPop}>you'll learn</span></span>
-      <span className={classes.infoText}>Get informed with tools to help you understand your body and explore your personal genome.</span>
-      <span className={classes.infoText}>Your DNA will be evaluated with a curated list of the most well-evidenced and researched genetic tests. After uploading your results from a supported DNA sequencing vendor, you'll be able to explore your results and find detailed descriptions, categories, and filters. Blueprint will instantly process and browse your data. It's fast, secure, free, and anonymous.</span>
+      <span className={classes.infoText}>Get informed with tools to help you understand your biology and explore your personal genome.</span>
+      <span className={classes.infoText}>Your DNA will be evaluated with a curated collection of genetic tests. After uploading your results from a supported DNA sequencing vendor, you'll be able to explore your results and find detailed descriptions, categories, and filters. It's fast, secure, free, and anonymous.</span>
     </InfoBox>
     <InfoBox className={classes.blueInfoBox}>
       <span className={classes.infoHeadline}>Your Blueprint</span>
-      <span className={classes.infoText}>Your DNA contains many thousands of variations (also called SNPs or variants) that are unique to you. Most variants have no known or established effect. However, some can cause specific physical traits, or in some cases disease. These variants can be passed down from parent to child.</span>
-      <span className={classes.infoText}>Genotyping tests from companies like 23andMe or AncestryDNA look at specific locations in your DNA and identify variants. These, combined with environmental factors, are make you unique.</span>
+      <span className={classes.infoText}>Your DNA contains many thousands of variations (also called SNPs or variants) that are unique to you. Most variants have no known or established effect. However, some are correlated with specific physical traits, or in some cases disease. These variants can be passed down from parent to child.</span>
+      <span className={classes.infoText}>Genotyping tests from companies like 23andMe or AncestryDNA look at specific locations in your DNA and identify variants. These variants, combined with environmental factors, are make you unique.</span>
       <span className={classes.infoText}>We focus on certain variants known to be associated with important health conditions and traits. Tests like these are the first step towards understanding how your genetics can impact your life.</span>
     </InfoBox>
     <InfoBox>

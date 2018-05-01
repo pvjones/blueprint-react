@@ -1,6 +1,12 @@
-html, body {
+* {
+  box-sizing: border-box;
+}
+
+html, 
+body,
+#app {
+  height: 100%;
   margin: 0;
-  padding: 0;
 }
 
 body {
@@ -9,6 +15,10 @@ body {
 }
 
 a {
-  color: inherit; /* get color from context */
+  color: #006296; /* get color from context */
   text-decoration: inherit; /* no underline */
+}
+
+a:hover {
+  color: #0089D4;
 }

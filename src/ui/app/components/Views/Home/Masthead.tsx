@@ -18,7 +18,7 @@ const Masthead: React.SFC<MergedProps> = ({ classes }) => (
     <div className={classes.subtitle}>Explore your DNA</div>
     <div className={classes.subtitle}>In-depth, secure, and free</div>
     <Link to='/login'>
-      <Button className={classes.button}>Get started</Button>
+      <Button colorKey='white' className={classes.button}>Get started</Button>
     </Link>
     <Parallax
       className={classes.parallaxHelix}
