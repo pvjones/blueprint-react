@@ -1,28 +1,50 @@
 import React from 'react'
+import { Map } from 'immutable'
 import { reduxForm } from 'redux-form/immutable'
 import { FormTextField, Button } from '../../Controls'
 import { Flexbox } from '../../Layout'
+import { InjectedFormProps } from 'redux-form'
 
-const LoginForm: React.SFC<any> = () => {
+const LoginForm: React.SFC<InjectedFormProps> = ({ handleSubmit, pristine, valid }) => {
+
   return (
-    <form>
-      <Flexbox flexDirection='column'>
+    <Flexbox flexDirection='column' flex='1'>
+      <form onSubmit={handleSubmit}>
         <FormTextField
           name='email'
           label='email address'
+          textFieldProps={{ fullWidth: true }}
         />
         <FormTextField
           name='password'
           label='password'
-          textFieldProps={{ type: 'password' }}
+          textFieldProps={{ type: 'password', fullWidth: true }}
         />
-        <Button>Sign in</Button>
-      </Flexbox>
-    </form>
+        <Button
+          type='submit'
+          disabled={pristine || !valid}
+          style={{ width: '100%' }}
+        >
+          Sign in
+          </Button>
+      </form>
+    </Flexbox>
   )
+}
+
+const validate = (values: Map<string, any>) => {
+  const requiredFields = ['email', 'password']
+  return requiredFields.reduce((r, field) => {
+    return {
+      ...r,
+      ...(!values.get(field) ? { [field]: 'Required' } : {})
+    }
+  }, {})
 }
 
 const LoginFormName = 'loginForm'
 export default reduxForm<any, any>({
+  validate,
   form: LoginFormName,
 })(LoginForm)
+

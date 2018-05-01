@@ -6,28 +6,16 @@ import { withStyles, WithStyles, StyleRulesCallback } from '../../Common'
 import { signIn } from '../../../store/actions/security.actions'
 import LoginForm from './Login.form'
 
-class Login extends React.PureComponent<MergedProps, OwnState> {
+class Login extends React.PureComponent<MergedProps, State> {
   constructor(props) {
     super(props)
-    this.state = {
-      email: '',
-      password: '',
-    }
-  }
-
-  handleChange = field => event => {
-    this.setState({ [field]: event.target.value })
-  }
-
-  handleSubmit = e => {
-    const { loginAction } = this.props
-    const { email, password } = this.state
-    loginAction(email, password)
-    e.preventDefault()
+    this.state = { errorMessage: ''}
   }
 
   render() {
     const { classes } = this.props
+    const { errorMessage } = this.state
+
     return (
       <Flexbox
         flex='1'
@@ -37,7 +25,7 @@ class Login extends React.PureComponent<MergedProps, OwnState> {
         className={classes.main}
       >
         <Flexbox
-          flex='1'
+          flex='3'
           flexDirection='column'
           alignItems='center'
           justifyContent='center'
@@ -51,8 +39,9 @@ class Login extends React.PureComponent<MergedProps, OwnState> {
           flexDirection='column'
           alignItems='center'
           className={classes.login}
-        >
-          <LoginForm />
+        > 
+          {errorMessage && <span className={classes.error}>{errorMessage}</span>}
+          <LoginForm onSubmit={this.handleSubmit} />
         </Paper>
         <Paper
           justifyContent='center'
@@ -62,30 +51,41 @@ class Login extends React.PureComponent<MergedProps, OwnState> {
             New to Blueprint? <Link to='/register'>Create an account</Link>.
           </span>
         </Paper>
-        <Flexbox flex='1' />
+        <Flexbox flex='4' />
       </Flexbox>
     )
   }
+
+  private handleSubmit = values => {
+    const { loginAction } = this.props
+    loginAction(values).catch(error => this.handleError(error))
+  }
+
+  private handleError = error => {
+    this.setState({ errorMessage: error.message })
+  }
+
 }
 
 const mapDispatchToProps = dispatch => ({
-  loginAction: (email, password) => dispatch(signIn(email, password)),
+  loginAction: (values) => dispatch(signIn(values)),
 })
 
-type ClassKeys = 'main' | 'login' | 'register' | 'logo' | 'headline'
+type ClassKeys = 'main' | 'login' | 'register' | 'logo' | 'headline' | 'error'
 const styles: StyleRulesCallback<ClassKeys> = ({
   typography,
   colors,
   spacing,
-  mixins: { percent, px, combine },
+  mixins: { percent, px, combine, pxToRem },
 }) => ({
   main: {
     height: percent(100),
     background: colors.blue[100],
   },
   login: {
+    position: 'relative',
     width: px(300),
-    paddingBottom: px(spacing.unit * 5),
+    padding: combine(px(spacing.unit * 3), px(spacing.unit * 3), px(spacing.unit * 5), px(spacing.unit * 3)),
   },
   register: {
     width: px(300),
@@ -102,9 +102,14 @@ const styles: StyleRulesCallback<ClassKeys> = ({
   },
   headline: {
     fontFamily: typography.headline.fontFamily,
-    fontSize: typography.headline.fontSize,
+    fontSize: pxToRem(24),
     fontWieght: typography.headline.fontWeight,
-    color: 'white',
+    color: colors.common.white,
+  },
+  error: {
+    position: 'absolute',
+    top: spacing.unit * 2,
+    color: colors.common.error,
   },
 })
 
@@ -115,13 +120,11 @@ export default connect<{}, DispatchProps>(
 
 export interface LoginProps { }
 
-interface OwnState {
-  email: string
-  password: string
+interface State {
+  errorMessage: string
 }
-
 interface DispatchProps {
-  loginAction: (email: string, password: string) => void
+  loginAction: (values: any) => Promise<void>
 }
 
 type MergedProps = LoginProps & DispatchProps & WithStyles<ClassKeys>

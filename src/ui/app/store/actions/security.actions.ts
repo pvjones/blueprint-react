@@ -12,17 +12,16 @@ export const clearSession = (): Action => ({
   type: actionDefs.Security.Session.Clear,
 })
 
-export const signIn = (email: string, password: string): ThunkAction =>
+export const signIn = (values): ThunkAction =>
   dispatch => {
-    const body = { email, password }
+    const body = {
+      email: values.get('email'),
+      password: values.get('password'),
+    }
 
     return dispatch(fetch.post('/auth/login', body))
-      .then(session => {
-        dispatch(setSession(session))
-      })
-      .catch(error => {
-        throw error
-      })
+      .then(session => dispatch(setSession(session)))
+      .catch(error => { throw error })
   }
 
 export const signOut = (): ThunkAction =>

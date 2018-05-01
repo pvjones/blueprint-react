@@ -13,6 +13,11 @@ const colors: Colors = {
     100: '#FF5637',
     200: '#FF907A',
   },
+  common: {
+    white: '#fff',
+    black: '#000',
+    error: '#cc0000',
+  },
 }
 
 export default colors
