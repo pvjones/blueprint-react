@@ -1,25 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withStyles, WithStyles, StyleRulesCallback } from '../../Common'
-import { Link } from '../../Routing'
 import { Flexbox } from '../../Layout'
-import { Button } from '../../Controls'
 import { signOut } from '../../../store/actions/security.actions'
+import Header from './Header'
 import Masthead from './Masthead'
 import InfoBox from './InfoBox'
 
 const Home: React.SFC<MergedProps> = ({ classes }) => (
   <Flexbox flexDirection='column' flex='1'>
-    <Flexbox
-      justifyContent='space-between'
-      alignItems='center'
-      className={classes.header}
-    >
-      <span>Blueprint</span>
-      <Link to='/login'>
-        <Button>Start Exploring</Button>
-      </Link>
-    </Flexbox>
+    <Header />
     <Masthead />
     <InfoBox>
       <span className={classes.infoHeadline}>What <span className={classes.colorPop}>you'll learn</span></span>
@@ -42,21 +32,12 @@ const mapDispatchToProps = dispatch => ({
   logoutAction: () => dispatch(signOut()),
 })
 
-type ClassKeys = 'header' | 'blueInfoBox' | 'infoText' | 'infoHeadline' | 'colorPop'
+type ClassKeys = 'blueInfoBox' | 'infoText' | 'infoHeadline' | 'colorPop'
 const styles: StyleRulesCallback<ClassKeys> = ({
   spacing,
   colors,
-  dimensions,
-  typography,
-  mixins: { px, combine, pxToRem },
+  mixins: { pxToRem },
 }) => ({
-  header: {
-    height: dimensions.topBarHeight,
-    padding: combine(px(0), px(spacing.unit * 3)),
-    color: colors.coral[100],
-    fontFamily: typography.headline.fontFamily,
-    fontSize: pxToRem(18),
-  },
   blueInfoBox: {
     backgroundColor: colors.blue[100],
     color: 'white',

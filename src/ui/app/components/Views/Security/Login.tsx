@@ -9,7 +9,7 @@ import LoginForm from './Login.form'
 class Login extends React.PureComponent<MergedProps, State> {
   constructor(props) {
     super(props)
-    this.state = { errorMessage: ''}
+    this.state = { errorMessage: '' }
   }
 
   render() {
@@ -28,7 +28,8 @@ class Login extends React.PureComponent<MergedProps, State> {
           flex='3'
           flexDirection='column'
           alignItems='center'
-          justifyContent='center'
+          justifyContent='flex-start'
+          className={classes.masthead}
         >
           <div className={classes.logo}>
             <img src='../../img/helix-logo.png' alt='logo' />
@@ -39,7 +40,7 @@ class Login extends React.PureComponent<MergedProps, State> {
           flexDirection='column'
           alignItems='center'
           className={classes.login}
-        > 
+        >
           {errorMessage && <span className={classes.error}>{errorMessage}</span>}
           <LoginForm onSubmit={this.handleSubmit} />
         </Paper>
@@ -71,7 +72,7 @@ const mapDispatchToProps = dispatch => ({
   loginAction: (values) => dispatch(signIn(values)),
 })
 
-type ClassKeys = 'main' | 'login' | 'register' | 'logo' | 'headline' | 'error'
+type ClassKeys = 'main' | 'login' | 'register' | 'logo' | 'masthead' | 'headline' | 'error'
 const styles: StyleRulesCallback<ClassKeys> = ({
   typography,
   colors,
@@ -86,6 +87,7 @@ const styles: StyleRulesCallback<ClassKeys> = ({
     position: 'relative',
     width: px(300),
     padding: combine(px(spacing.unit * 3), px(spacing.unit * 3), px(spacing.unit * 5), px(spacing.unit * 3)),
+    minHeight: px(288),
   },
   register: {
     width: px(300),
@@ -99,6 +101,10 @@ const styles: StyleRulesCallback<ClassKeys> = ({
       width: px(100),
       height: 'auto',
     },
+  },
+  masthead: {
+    paddingTop: px(spacing.unit * 3),
+    minHeight: px(spacing.unit * 25),
   },
   headline: {
     fontFamily: typography.headline.fontFamily,

@@ -42,7 +42,7 @@ const validate = (values: Map<string, any>) => {
   }, {})
 }
 
-const LoginFormName = 'loginForm'
+const LoginFormName = 'LoginForm'
 export default reduxForm<any, any>({
   validate,
   form: LoginFormName,

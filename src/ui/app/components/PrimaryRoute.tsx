@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route, AuthenticatedRoute } from './Routing'
 import Login from './Views/Security/Login'
-import Register from './Views/Security/Register'
+import Registration from './Views/Security/Registration'
 import Home from './Views/Home/Home'
 
 const PrimaryRoute: React.SFC = () => (
@@ -14,7 +14,7 @@ const PrimaryRoute: React.SFC = () => (
     />
     <AuthenticatedRoute
       path='/register'
-      render={() => <Register />}
+      render={() => <Registration />}
       redirectPath='/'
       redirectIfAuthenticated
     />
