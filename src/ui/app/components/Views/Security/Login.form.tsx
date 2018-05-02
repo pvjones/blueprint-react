@@ -5,7 +5,7 @@ import { FormTextField, Button } from '../../Controls'
 import { Flexbox } from '../../Layout'
 import { InjectedFormProps } from 'redux-form'
 
-const LoginForm: React.SFC<InjectedFormProps> = ({ handleSubmit, pristine, valid }) => {
+const LoginForm: React.SFC<InjectedFormProps> = ({ handleSubmit, }) => {
 
   return (
     <Flexbox flexDirection='column' flex='1'>
@@ -13,16 +13,18 @@ const LoginForm: React.SFC<InjectedFormProps> = ({ handleSubmit, pristine, valid
         <FormTextField
           name='email'
           label='email address'
+          showErrorOnSubmit
           textFieldProps={{ fullWidth: true }}
         />
         <FormTextField
           name='password'
           label='password'
+          showErrorOnSubmit
           textFieldProps={{ type: 'password', fullWidth: true }}
         />
         <Button
           type='submit'
-          disabled={pristine || !valid}
+          // disabled={pristine || !valid}
           style={{ width: '100%' }}
         >
           Sign in

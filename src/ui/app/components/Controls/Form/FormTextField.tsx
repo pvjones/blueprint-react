@@ -6,26 +6,30 @@ import {
   BaseFieldProps,
 } from 'redux-form'
 
-const renderTextField: React.SFC<TextFieldProps & WrappedFieldProps> = ({
+const renderTextField: React.SFC<TextFieldProps & AdditionalProps & WrappedFieldProps> = ({
   input: { value, onChange, onBlur },
-  meta: { touched, error },
+  meta: { error, submitFailed, touched },
   type = 'text',
-  ...rest,
-}) => (
+  showErrorOnSubmit = false,
+  ...other,
+}) => {
+  const errorMessage = showErrorOnSubmit ? submitFailed && error : touched && error
+  return (
     <TextField
       type={type}
       onBlur={onBlur}
-      helperText={touched && error}
+      helperText={errorMessage}
       onChange={e => onChange(e.target.value)}
       value={value}
-      {...rest}
+      {...other}
     />
   )
+}
 
 const FormTextField: React.SFC<BaseFieldProps<TextFieldProps> & FormTextFieldProps> = ({
   name,
   textFieldProps,
-  ...rest,
+  ...other,
 }) => {
   return (
     <Field
@@ -33,13 +37,17 @@ const FormTextField: React.SFC<BaseFieldProps<TextFieldProps> & FormTextFieldPro
       // todo: figure out @types/redux-form typings
       component={renderTextField as any}
       props={textFieldProps}
-      {...rest}
+      {...other}
     />
   )
 }
 
-export interface FormTextFieldProps {
+interface AdditionalProps {
+  showErrorOnSubmit?: boolean
+}
+export interface FormTextFieldProps extends AdditionalProps {
   textFieldProps?: TextFieldProps
+
 }
 
 export default FormTextField
