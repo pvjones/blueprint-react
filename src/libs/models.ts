@@ -17,9 +17,18 @@ interface ApiConfig {
   port: number
 }
 
+interface UiConfig {
+  reCaptcha: ReCaptchaConfig
+}
+
+interface ReCaptchaConfig {
+  siteKey: string
+}
+
 export interface EnvConfig {
   db: DbConfig
   api: ApiConfig
+  ui: UiConfig
 }
 
 export type EnvKeys = 'dev' | 'prod'

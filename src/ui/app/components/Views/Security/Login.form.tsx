@@ -24,8 +24,7 @@ const LoginForm: React.SFC<InjectedFormProps> = ({ handleSubmit, }) => {
         />
         <Button
           type='submit'
-          // disabled={pristine || !valid}
-          style={{ width: '100%' }}
+          style={{ width: '100%', marginTop: '8px' }}
         >
           Sign in
           </Button>

@@ -5,7 +5,6 @@ import { FormTextField, Button } from '../../Controls'
 import { Flexbox } from '../../Layout'
 import { InjectedFormProps } from 'redux-form'
 
-
 const RegistrationForm: React.SFC<InjectedFormProps> = ({
   handleSubmit,
   pristine,
@@ -41,7 +40,7 @@ const RegistrationForm: React.SFC<InjectedFormProps> = ({
         <Button
           type='submit'
           disabled={pristine || !valid}
-          style={{ width: '100%' }}
+          style={{ width: '100%', marginTop: '8px' }}
         >
           Create Account
         </Button>
