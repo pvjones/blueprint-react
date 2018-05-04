@@ -4,7 +4,7 @@ import {
   BaseFieldProps,
 } from 'redux-form'
 import { Field } from 'redux-form/immutable'
-import ReCaptcha from 'react-recaptcha'
+import ReCaptcha from 'react-google-recaptcha'
 import getConfig from '../../../../../libs/config'
 
 const renderCaptcha: React.SFC<WrappedFieldProps> = ({
@@ -13,7 +13,7 @@ const renderCaptcha: React.SFC<WrappedFieldProps> = ({
 }) => {
   const sitekey = getConfig().ui.reCaptcha.siteKey
 
-  const onVerify = response => {
+  const verify = response => {
     console.log('response')
     onChange(response)
   }
@@ -21,7 +21,7 @@ const renderCaptcha: React.SFC<WrappedFieldProps> = ({
   return (
     <ReCaptcha
       sitekey={sitekey}
-      verifyCallback={onVerify}
+      onChange={verify}
       {...other}
     />
   )

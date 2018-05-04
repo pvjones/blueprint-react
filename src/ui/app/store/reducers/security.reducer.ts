@@ -1,7 +1,7 @@
 import { fromJS, Map } from 'immutable'
 import { serializeStateToLocalStorage, deserializeStateFromLocalStorage } from '../../../utils/storage.utils'
 import actionDefs from '../actions/actionDefs'
-import { SecurityState, Reducer, PayloadFunc } from '../store.models'
+import { SecurityState, Reducer, PayloadFunc } from '../models'
 
 const setSession: PayloadFunc<SecurityState, any> = (state, payload) =>
   state.merge(fromJS({ session: payload }))

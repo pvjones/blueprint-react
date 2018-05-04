@@ -1,11 +1,11 @@
 import React from 'react'
-// import { Map } from 'immutable'
 import { reduxForm } from 'redux-form/immutable'
-import { FormTextField, Button } from '../../Controls'
+import { FormTextField, FormCaptcha, Button } from '../../Controls'
 import { Flexbox } from '../../Layout'
-import { InjectedFormProps } from 'redux-form'
+import { InjectedFormProps, FormErrors } from 'redux-form'
+import { UserRegistrationMap, UserRegistration } from '../../../store/models'
 
-const RegistrationForm: React.SFC<InjectedFormProps> = ({
+const RegistrationForm: React.SFC<InjectedFormProps<UserRegistrationMap>> = ({
   handleSubmit,
   pristine,
   valid,
@@ -37,6 +37,9 @@ const RegistrationForm: React.SFC<InjectedFormProps> = ({
           label='Confirm password'
           textFieldProps={{ type: 'password', fullWidth: true }}
         />
+        <Flexbox justifyContent='center' marginBottom='16px'>
+          <FormCaptcha name='captcha' />
+        </Flexbox>
         <Button
           type='submit'
           disabled={pristine || !valid}
@@ -48,8 +51,8 @@ const RegistrationForm: React.SFC<InjectedFormProps> = ({
     </Flexbox>
   )
 
-const validate = (values: Map<string, any>) => {
-  const requiredFields = ['email', 'password', 'confirmPassword']
+const validate = (values: UserRegistrationMap): FormErrors<UserRegistration> => {
+  const requiredFields = ['email', 'password', 'confirmPassword', 'recaptcha'] as (keyof UserRegistrationMap['get'])[]
 
   return requiredFields.reduce((r, field) => {
     return {
@@ -60,7 +63,7 @@ const validate = (values: Map<string, any>) => {
 }
 
 const RegistrationFormName = 'RegistrationForm'
-export default reduxForm<any, any>({
+export default reduxForm<UserRegistrationMap | UserRegistration, {}>({
   validate,
   form: RegistrationFormName,
 })(RegistrationForm)

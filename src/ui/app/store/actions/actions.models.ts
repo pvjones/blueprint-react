@@ -1,4 +1,4 @@
-import { AppStore } from '../store.models'
+import { AppStore } from '../models'
 
 export interface Action<P = {}> {
   type: string

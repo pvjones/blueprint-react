@@ -5,7 +5,7 @@ import { setAlert } from './appState.actions'
 import { clearSession } from './security.actions'
 import getConfig from '../../../utils/config'
 import { Dispatch } from 'react-redux'
-import { ThunkAction } from '../store.models'
+import { ThunkAction } from '../models'
 
 const api = getConfig().api
 const apiUrl = `${api.host}:${api.port}/${api.baseUrl}`

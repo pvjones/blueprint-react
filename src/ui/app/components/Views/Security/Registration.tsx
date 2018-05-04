@@ -2,8 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Flexbox, Paper } from '../../Layout'
 import { withStyles, WithStyles, StyleRulesCallback } from '../../Common'
-import { signIn } from '../../../store/actions/security.actions'
+import { registerUser } from '../../../store/actions/security.actions'
 import RegistrationForm from './Registration.form'
+import { UserRegistrationMap } from '../../../store/models'
 
 class Registration extends React.PureComponent<MergedProps, State> {
   constructor(props) {
@@ -48,20 +49,20 @@ class Registration extends React.PureComponent<MergedProps, State> {
     )
   }
 
-  private handleSubmit = values => {
+  private handleSubmit = (values: UserRegistrationMap): void => {
     const { registerAction } = this.props
     registerAction(values)
       .catch(error => this.handleError(error))
   }
 
-  private handleError = error => {
+  private handleError = (error: Error): void => {
     this.setState({ errorMessage: error.message })
   }
 
 }
 
 const mapDispatchToProps = dispatch => ({
-  registerAction: (values) => dispatch(signIn(values)),
+  registerAction: (values) => dispatch(registerUser(values)),
 })
 
 type ClassKeys = 'main' | 'registration' | 'logo' | 'masthead' | 'headline' | 'error'
@@ -77,7 +78,7 @@ const styles: StyleRulesCallback<ClassKeys> = ({
   },
   registration: {
     position: 'relative',
-    width: px(320),
+    width: px(360),
     padding: combine(px(spacing.unit * 3), px(spacing.unit * 3), px(spacing.unit * 5), px(spacing.unit * 3)),
   },
 
@@ -117,7 +118,7 @@ interface State {
   errorMessage: string
 }
 interface DispatchProps {
-  registerAction: (values: any) => Promise<void>
+  registerAction: (values: UserRegistrationMap) => Promise<void>
 }
 
 type MergedProps = RegistrationProps & DispatchProps & WithStyles<ClassKeys>

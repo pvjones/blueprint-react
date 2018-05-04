@@ -1,22 +1,22 @@
 import { List, Map, Iterable } from 'immutable'
 import { RouterState } from 'react-router-redux'
 
-interface ModeledMap<M> extends Map<string, any> {
+export interface ModelMap<M> extends Map<string, any> {
   toJS(): M
-  toList(): List<ModeledMap<M>>
+  toList(): List<ModelMap<M>>
   get<K extends keyof M>(key: K, notSetValue?: M[K]): M[K]
   getIn<T>(searchKeyPath: string[] | Iterable<any, any>, notSetValue?: T): T
 }
 
-export type AppStateState = ModeledMap<{
-  alert: ModeledMap<{
+export type AppStateState = ModelMap<{
+  alert: ModelMap<{
     message: string
     status: number
   }>
 }>
 
-export type SecurityState = ModeledMap<{
-  session: ModeledMap<{
+export type SecurityState = ModelMap<{
+  session: ModelMap<{
   }>,
 }>
 
@@ -26,5 +26,7 @@ export interface AppStore {
   security?: SecurityState
 }
 
-export * from './actions/actions.models'
-export * from './reducers/reducers.models'
+export * from '../actions/actions.models'
+export * from '../reducers/reducers.models'
+
+export * from './security.models'

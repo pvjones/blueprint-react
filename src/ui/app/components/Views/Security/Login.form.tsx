@@ -1,11 +1,11 @@
 import React from 'react'
-import { Map } from 'immutable'
 import { reduxForm } from 'redux-form/immutable'
 import { FormTextField, Button } from '../../Controls'
 import { Flexbox } from '../../Layout'
-import { InjectedFormProps } from 'redux-form'
+import { InjectedFormProps, FormErrors } from 'redux-form'
+import { UserLoginMap, UserLogin } from '../../../store/models'
 
-const LoginForm: React.SFC<InjectedFormProps> = ({ handleSubmit, }) => {
+const LoginForm: React.SFC<InjectedFormProps<UserLoginMap>> = ({ handleSubmit }) => {
 
   return (
     <Flexbox flexDirection='column' flex='1'>
@@ -33,8 +33,9 @@ const LoginForm: React.SFC<InjectedFormProps> = ({ handleSubmit, }) => {
   )
 }
 
-const validate = (values: Map<string, any>) => {
-  const requiredFields = ['email', 'password']
+const validate = (values: UserLoginMap): FormErrors<UserLogin> => {
+  const requiredFields = ['email', 'password'] as (keyof UserLoginMap['get'])[]
+
   return requiredFields.reduce((r, field) => {
     return {
       ...r,
@@ -44,7 +45,7 @@ const validate = (values: Map<string, any>) => {
 }
 
 const LoginFormName = 'LoginForm'
-export default reduxForm<any, any>({
+export default reduxForm<UserLoginMap | UserLogin, {}>({
   validate,
   form: LoginFormName,
 })(LoginForm)

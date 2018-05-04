@@ -5,6 +5,7 @@ import { Flexbox, Paper } from '../../Layout'
 import { withStyles, WithStyles, StyleRulesCallback } from '../../Common'
 import { signIn } from '../../../store/actions/security.actions'
 import LoginForm from './Login.form'
+import { UserLoginMap } from '../../../store/models'
 
 class Login extends React.PureComponent<MergedProps, State> {
   constructor(props) {
@@ -57,12 +58,12 @@ class Login extends React.PureComponent<MergedProps, State> {
     )
   }
 
-  private handleSubmit = values => {
+  private handleSubmit = (values: UserLoginMap): void => {
     const { loginAction } = this.props
     loginAction(values).catch(error => this.handleError(error))
   }
 
-  private handleError = error => {
+  private handleError = (error: Error): void => {
     this.setState({ errorMessage: error.message })
   }
 
@@ -85,12 +86,12 @@ const styles: StyleRulesCallback<ClassKeys> = ({
   },
   login: {
     position: 'relative',
-    width: px(300),
+    width: px(320),
     padding: combine(px(spacing.unit * 3), px(spacing.unit * 3), px(spacing.unit * 5), px(spacing.unit * 3)),
     minHeight: px(288),
   },
   register: {
-    width: px(300),
+    width: px(320),
     marginTop: px(spacing.unit * 2),
     padding: px(spacing.unit * 2),
   },
@@ -130,7 +131,7 @@ interface State {
   errorMessage: string
 }
 interface DispatchProps {
-  loginAction: (values: any) => Promise<void>
+  loginAction: (values: UserLoginMap) => Promise<void>
 }
 
 type MergedProps = LoginProps & DispatchProps & WithStyles<ClassKeys>

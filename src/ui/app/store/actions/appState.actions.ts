@@ -1,5 +1,5 @@
 import actionDefs from './actionDefs'
-import { Action } from './actions.models'
+import { Action } from '../models'
 
 export const setAlert = (message: string, status?: number): Action => {
   return {

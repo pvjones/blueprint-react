@@ -1,7 +1,7 @@
 import actionDefs from './actionDefs'
 import fetch from './fetch.actions'
 import { setAlert } from './appState.actions'
-import { Action, ThunkAction } from '../store.models'
+import { Action, ThunkAction, UserLoginMap, UserRegistrationMap } from '../models'
 
 export const setSession = (session: any): Action => ({
   type: actionDefs.Security.Session.Set,
@@ -12,7 +12,7 @@ export const clearSession = (): Action => ({
   type: actionDefs.Security.Session.Clear,
 })
 
-export const signIn = (values): ThunkAction =>
+export const signIn = (values: UserLoginMap): ThunkAction =>
   dispatch => {
     const body = {
       email: values.get('email'),
@@ -30,15 +30,16 @@ export const signOut = (): ThunkAction =>
       .then(() => dispatch(clearSession()))
       .catch(error => dispatch(setAlert(error.message)))
 
-export const registerUser = (email: string, firstName: string, lastName: string, password: string): ThunkAction =>
+export const registerUser = (values: UserRegistrationMap): ThunkAction =>
   dispatch => {
     const body = {
-      email,
-      firstName,
-      lastName,
-      password,
+      email: values.get('email'),
+      firstName: values.get('firstName'),
+      lastName: values.get('lastName'),
+      password: values.get('password'),
     }
-    dispatch(fetch.post('/auth/register', body))
+
+    return dispatch(fetch.post('/auth/register', body))
       .then(() => 'success')
-      .catch(() => 'error')
+      .catch(error => { throw error })
   }

@@ -1,6 +1,6 @@
 import { Map } from 'immutable'
 import actionDefs from '../actions/actionDefs'
-import { AppStateState, Reducer, Action, PayloadFunc } from '../store.models'
+import { AppStateState, Reducer, Action, PayloadFunc } from '../models'
 
 const setAlert: PayloadFunc<AppStateState, any> = (state, payload) => state.merge({
   alert: payload,
