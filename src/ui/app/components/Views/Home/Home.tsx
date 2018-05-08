@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { signOut } from '../../../store/actions/security.actions'
-import { withStyles, WithStyles, StyleRulesCallback } from '../../Common'
+import { withStyles, WithStyles, StyleRulesCallback, classNames } from '../../Common'
 import { Flexbox, Paper } from '../../Layout'
-import { Grid } from 'material-ui'
+import { Grid, Divider } from 'material-ui'
 import { CheckCircle, Link, Search, Healing, AssignmentInd, RemoveRedEye } from 'material-ui-icons'
 import Header from './Header'
 import Masthead from './Masthead'
@@ -45,9 +45,13 @@ const Home: React.SFC<MergedProps> = ({ classes }) => (
         ))}
       </Grid>
     </InfoBox>
+    <Divider className={classes.divider} />
     <InfoBox>
-    <span className={classes.headline}>Feel free to <span className={classes.colorPop}>get in touch</span></span>
+      <span className={classes.headline}>Feel free to <span className={classes.colorPop}>get in touch</span></span>
     </InfoBox>
+    <Flexbox alignItems='center' justifyContent='space-between' className={classNames(classes.blueInfoBox, classes.footer)}>
+      <span>Copyright © Paul V Jones 2017 - 2018</span>
+    </Flexbox>
   </Flexbox>
 )
 
@@ -55,7 +59,7 @@ const mapDispatchToProps = dispatch => ({
   logoutAction: () => dispatch(signOut()),
 })
 
-type ClassKeys = 'blueInfoBox' | 'infoText' | 'headline' | 'colorPop' | 'infoCard'
+type ClassKeys = 'blueInfoBox' | 'infoText' | 'headline' | 'colorPop' | 'infoCard' | 'divider' | 'footer'
 const styles: StyleRulesCallback<ClassKeys> = ({
   spacing,
   colors,
@@ -100,6 +104,15 @@ const styles: StyleRulesCallback<ClassKeys> = ({
       lineHeight: pxToRem(22),
       textAlign: 'left',
     },
+  },
+  divider: {
+    alignSelf: 'center',
+    width: percent(50),
+    marginTop: spacing.unit * 4,
+    marginBottom: spacing.unit * 3,
+  },
+  footer: {
+    padding: combine(spacing.unit * 5, spacing.unit * 5),
   },
 })
 
