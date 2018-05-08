@@ -7,7 +7,7 @@ const colors: Colors = {
     500: '#009BF0',
     600: '#51BBFF',
     700: '#7BCDFF',
-    800: '#7BCDFF',
+    800: '#F2F6F8',
   },
   coral: {
     100: '#FF5637',

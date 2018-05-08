@@ -3,23 +3,29 @@ import classNames from 'classnames'
 import { withStyles, WithStyles, StyleRulesCallback } from '../../Common'
 import { Flexbox, FlexboxProps } from '../../Layout'
 
-const InfoBox: React.SFC<MergedProps> = ({ children, classes, className, ...other }) => (
-  <Flexbox
-    flexDirection='row'
-    alignItems='center'
-    justifyContent='center'
-    flex='1'
-    className={classNames(classes.main, className)}
-    {...other}
-  >
-    <Flexbox flex='1 1 auto' />
-    <Flexbox flex='2 0 200px' flexDirection='column' alignItems='center' justifyContent='center'>
-      {children}
-    </Flexbox>
-    <Flexbox flex='1 1 auto' />
+const InfoBox: React.SFC<MergedProps> = ({
+  children,
+  classes,
+  className,
+  growWidth = 2,
+  ...other,
+}) => (
+    <Flexbox
+      flexDirection='row'
+      alignItems='center'
+      justifyContent='center'
+      flex='1'
+      className={classNames(classes.main, className)}
+      {...other}
+    >
+      <Flexbox flex='1 1 auto' />
+      <Flexbox flex={`${growWidth} 0 200px`} flexDirection='column' alignItems='center' justifyContent='center'>
+        {children}
+      </Flexbox>
+      <Flexbox flex='1 1 auto' />
 
-  </Flexbox>
-)
+    </Flexbox>
+  )
 
 type ClassKeys = 'main'
 const styles: StyleRulesCallback<ClassKeys> = ({ spacing, mixins: { combine, px } }) => ({
@@ -30,6 +36,8 @@ const styles: StyleRulesCallback<ClassKeys> = ({ spacing, mixins: { combine, px 
 
 export default withStyles(styles)(InfoBox)
 
-export interface InfoBoxProps extends FlexboxProps { }
+export interface InfoBoxProps extends FlexboxProps {
+  growWidth?: number
+}
 
 type MergedProps = InfoBoxProps & WithStyles<ClassKeys>
