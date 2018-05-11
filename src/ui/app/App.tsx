@@ -10,6 +10,7 @@ import { composeStore } from './store/store'
 import registerServiceWorker from './registerServiceWorker'
 import PrimaryRoute from './components/PrimaryRoute'
 import './app.css'
+import 'font-awesome/css/font-awesome.min.css'
 
 const history = createHistory()
 const historyMiddleware = routerMiddleware(history)

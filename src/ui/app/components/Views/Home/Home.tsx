@@ -4,7 +4,14 @@ import { signOut } from '../../../store/actions/security.actions'
 import { withStyles, WithStyles, StyleRulesCallback, classNames } from '../../Common'
 import { Flexbox, Paper } from '../../Layout'
 import { Grid, Divider } from 'material-ui'
-import { CheckCircle, Link, Search, Healing, AssignmentInd, RemoveRedEye } from 'material-ui-icons'
+import {
+  CheckCircle,
+  Link as LinkIcon,
+  Search,
+  Healing,
+  AssignmentInd,
+  RemoveRedEye,
+} from 'material-ui-icons'
 import Header from './Header'
 import Masthead from './Masthead'
 import InfoBox from './InfoBox'
@@ -47,10 +54,15 @@ const Home: React.SFC<MergedProps> = ({ classes }) => (
     </InfoBox>
     <Divider className={classes.divider} />
     <InfoBox>
-      <span className={classes.headline}>Feel free to <span className={classes.colorPop}>get in touch</span></span>
+      <span className={classes.headline}>Questions? <span className={classes.colorPop}>Get in touch.</span></span>
     </InfoBox>
     <Flexbox alignItems='center' justifyContent='space-between' className={classNames(classes.blueInfoBox, classes.footer)}>
       <span>Copyright © Paul V Jones 2017 - 2018</span>
+      <Flexbox>
+        <a href='https://github.com/pvjones/blueprint-react'>
+          <div className='fa fa-github fa-3x' />
+        </a>
+      </Flexbox>
     </Flexbox>
   </Flexbox>
 )
@@ -127,7 +139,7 @@ const infoCards = [
     text: 'Our algorithms identify only the most relevant and reputable tests from crowd-sourced lists.'
   },
   {
-    icon: Link,
+    icon: LinkIcon,
     headline: 'Established associations',
     text: 'genoytpe-trait associations are compared against high-confidence and peer-reviewed studies.'
   },

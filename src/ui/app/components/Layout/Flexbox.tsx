@@ -73,7 +73,7 @@ export type JustifyContentKey = 'center' | 'flex-end' | 'flex-start' | 'space-ar
 export type FlexDirectionKey = 'column-reverse' | 'column' | 'row-reverse' | 'row'
 export type FlexWrapKey = 'nowrap' | 'wrap-reverse' | 'wrap'
 
-export interface FlexboxProps {
+export interface FlexboxProps extends React.ClassAttributes<{}> {
   alignContent?: AlignContentKey
   alignItems?: AlignItemsKey
   alignSelf?: AlignItemsKey

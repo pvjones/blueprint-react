@@ -22,12 +22,16 @@ const Masthead: React.SFC<MergedProps> = ({ classes }) => (
     </Link>
     <Parallax
       className={classes.parallaxHelix}
-      rateDivisor={3}
+      rateMultiplier={0.33}
+      left={30}
+      bottom={0}
       component={<img src='../../img/backbone.png' alt='dna-helix' />}
     />
     <Parallax
       className={classes.parallaxSketch}
-      rateDivisor={3}
+      rateMultiplier={0.33}
+      top={-50}
+      right={30}
       component={<img src='../../img/helix-sketch.png' alt='dna-helix-sketch' />}
     />
   </Flexbox>
@@ -67,9 +71,6 @@ const styles: StyleRulesCallback<ClassKeys> = ({
     marginTop: spacing.unit,
   },
   parallaxHelix: {
-    position: 'absolute',
-    top: 0,
-    left: 30,
     width: px(120),
     opacity: 0.3,
     '& img': {
@@ -78,9 +79,6 @@ const styles: StyleRulesCallback<ClassKeys> = ({
     },
   },
   parallaxSketch: {
-    position: 'absolute',
-    top: 0,
-    right: 30,
     width: px(160),
     opacity: 0.4,
     '& img': {
