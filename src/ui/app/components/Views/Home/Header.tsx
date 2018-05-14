@@ -26,20 +26,35 @@ class Header extends React.PureComponent<MergedProps, State> {
     const { isScrolling } = this.state
 
     return (
-      <Flexbox
-        ref={el => this.setElement(el)}
-        flexDirection='row'
-        justifyContent='space-between'
-        alignItems='center'
-        className={classNames(classes.main, { [classes.scrolling]: isScrolling })}
-      >
-        <span>Blueprint</span>
-        <Link to='/login'>
-          <Button>Start Exploring</Button>
-        </Link>
+      <Flexbox>
+        <Flexbox
+          ref={el => this.setElement(el)}
+          flexDirection='row'
+          justifyContent='space-between'
+          alignItems='center'
+          className={classes.main}
+        >
+          {this.renderContent()}
+        </Flexbox>
+        <Flexbox
+          flexDirection='row'
+          justifyContent='space-between'
+          alignItems='center'
+          className={classNames(classes.main, classes.scrollBar, { [classes.scrolling]: isScrolling })}>
+          {this.renderContent()}
+        </Flexbox>
       </Flexbox>
     )
   }
+
+  private renderContent = () => (
+    <React.Fragment>
+      <span>Blueprint</span>
+      <Link to='/login'>
+        <Button>Start Exploring</Button>
+      </Link>
+    </React.Fragment>
+  )
 
   private setElement = (el: HTMLElement): void => {
     this.setState({ el })
@@ -51,13 +66,13 @@ class Header extends React.PureComponent<MergedProps, State> {
   }
 }
 
-type ClassKeys = 'main' | 'scrolling'
+type ClassKeys = 'main' | 'scrolling' | 'scrollBar'
 const styles: StyleRulesCallback<ClassKeys> = ({
   dimensions,
   spacing,
   colors,
   typography,
-  mixins: { combine, px, percent, pxToRem },
+  mixins: { combine, px, percent, pxToRem, border, hexToRgbA },
 }) => ({
   main: {
     width: percent(100),
@@ -67,11 +82,19 @@ const styles: StyleRulesCallback<ClassKeys> = ({
     fontFamily: typography.headline.fontFamily,
     fontSize: pxToRem(18),
   },
+  scrollBar: {
+    position: 'fixed',
+    height: px(0),
+    overflow: 'hidden',
+    transition: 'height 0.2s ease'
+  },
   scrolling: {
+    height: dimensions.topBarHeight,
     zIndex: 1000,
     position: 'fixed',
     backgroundColor: 'white',
-    opacity: 0.8,
+    borderBottom: border(1, true, hexToRgbA(colors.blue[100], 0.3)),
+    opacity: 0.9,
   },
 })
 
